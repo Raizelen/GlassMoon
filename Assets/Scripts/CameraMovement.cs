@@ -4,19 +4,29 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    public PlayerController player;
-    public float smoothening = .1f;
+    private Vector3 offset = new Vector3(0f, 1f, -10f);
+    private float smoothTime = .25f;
+    private Vector3 velocity = Vector3.zero;
 
-    private Transform target;
-    void Start()
+    [SerializeField] private Transform target;
+    [SerializeField] private Rigidbody2D rb;
+
+    private void Awake()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         target = player.transform;
+        rb = player.GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        Vector3 targetLocation = new Vector3(target.position.x + (player.facingRight ? 1 : -1), target.position.y, -10);
-        transform.position = Vector3.MoveTowards(transform.position, targetLocation, smoothening);
+        try
+        {
+            Vector3 targetPosition = target.position + offset + new Vector3(rb.velocity.x / 5, rb.velocity.y / 5, 0);
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+        } catch
+        {
+            enabled = false;
+        }
     }
 }

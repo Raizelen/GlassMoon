@@ -4,31 +4,35 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = .1f;
+    public float speed = .05f;
     public bool isPlayerBullet;
-    public Vector2 direction;
+    public Vector3 direction;
     public float damage = 10f;
 
-    public void Update()
-    {
-        transform.Translate(direction * speed * Time.deltaTime);
+    [SerializeField] private Rigidbody2D rb;
 
-        // if (Vector2.Distance(transform.position, GameManager.instance.player.transform.position) > 100) Destroy(gameObject);
+    public void FixedUpdate()
+    {
+        rb.MovePosition(transform.position + direction * speed);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (isPlayerBullet && collision.collider.CompareTag("Enemy"))
+        if (isPlayerBullet && collider.CompareTag("Enemy"))
         {
-            collision.collider.gameObject.GetComponent<Enemy>().Hit(damage);
+            collider.gameObject.GetComponent<Enemy>().Hit(damage);
             Destroy(gameObject);
             return;
         }
-        if (!isPlayerBullet && collision.collider.CompareTag("Player"))
+        if (!isPlayerBullet && collider.CompareTag("Player"))
         {
-            collision.collider.gameObject.GetComponent<Player>().Hit(damage);
+            collider.gameObject.GetComponent<PlayerHealth>().Hit(damage, transform.position);
             Destroy(gameObject);
             return;
+        }
+        if (collider.CompareTag("Ground"))
+        {
+            Destroy(gameObject);
         }
     }
 }

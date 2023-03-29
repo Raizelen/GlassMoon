@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Enemy
+  - Ladder
+  - Portal
+  - FallDeath
+  - Finish_
   layers:
   - Default
   - TransparentFX
@@ -12,7 +17,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Ground
   - 
   - 
   - 
@@ -41,4 +46,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3114759883
+    locked: 0
+  - name: Ground
+    uniqueID: 4032783583
+    locked: 0
+  - name: Player
+    uniqueID: 2290477771
     locked: 0
