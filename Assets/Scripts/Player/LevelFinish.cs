@@ -21,6 +21,7 @@ public class LevelFinish : MonoBehaviour
     {
         if (collision.CompareTag("Finish_"))
         {
+            CameraUIManager.instance.ShowMessage(collision.transform.position + Vector3.up * 4, "Press E to advance", 4f);
             inRange = true;
         }
     }

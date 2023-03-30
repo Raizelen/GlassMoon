@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpikeEnemy : MonoBehaviour
 {
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float bulletSpeed = .2f;
     [SerializeField] float startAngle = 30f;
     [SerializeField] float endAngle = 150f;
     [SerializeField] int numberOfBullets = 5;
@@ -25,7 +26,7 @@ public class SpikeEnemy : MonoBehaviour
                 Bullet b = _bullet.GetComponent<Bullet>();
                 b.direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
                 b.isPlayerBullet = false;
-                b.speed = 1.5f;
+                b.speed = bulletSpeed;
             }
             yield return new WaitForSeconds(interval);
         }

@@ -19,6 +19,7 @@ public class PlayerTeleportation : MonoBehaviour
     {
         if (collision.CompareTag("Portal"))
         {
+            CameraUIManager.instance.ShowMessage(collision.transform.position + Vector3.up * 4, "Press E to teleport", 4f);
             currentTeleporter = collision.gameObject;
         }
     }

@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 5068400345444913452}
   m_Layer: 6
   m_Name: 3x1 Floating platform
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

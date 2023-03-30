@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: -6795758251337741282}
   m_Layer: 6
   m_Name: 1x3 Wall Right
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -8,6 +8,10 @@ public class InGameUIManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
         instance = this;
     }
 

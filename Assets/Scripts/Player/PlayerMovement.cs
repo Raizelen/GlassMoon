@@ -10,14 +10,14 @@ public class PlayerMovement : MonoBehaviour
     private float jumpingPower = 20f;
     private bool isFacingRight = true;
 
-    private bool dashAbility = true;
+    public bool dashAbility = true;
     private bool canDash = true;
     private bool isDashing;
     private float dashingPower = 24f;
     private float dashingTime = .2f;
-    private float dashingCooldown = 1f;
+    private float dashingCooldown = .3f;
 
-    private bool doubleJumpAbility = true;
+    public bool doubleJumpAbility = true;
     private bool doubleJump;
 
     [SerializeField] private ParticleManager particleManager;
@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
             if (IsGrounded() || doubleJump && doubleJumpAbility)
             {
                 animator.Play("jump");
+                AudioManager.instance.PlayOneShot(2);
                 particleManager.PlayEffect(0);
                 rb.velocity = new Vector2(rb.velocity.x, jumpingPower);
                 doubleJump = !doubleJump;
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (dashAbility && Input.GetButtonDown("Fire2") && canDash)
         {
+            AudioManager.instance.PlayOneShot(3);
             animator.Play("dash");
             StartCoroutine(Dash());
         }

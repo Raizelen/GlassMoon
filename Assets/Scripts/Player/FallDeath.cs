@@ -10,9 +10,8 @@ public class FallDeath : MonoBehaviour
         {
             if (CompareTag("Player"))
             {
-                Debug.Log("Player died");
+                GameManager.instance.OnPlayerDeath();
             }
-            Destroy(gameObject);
         }
     }
 }

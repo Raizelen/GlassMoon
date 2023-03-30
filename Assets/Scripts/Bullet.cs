@@ -4,35 +4,54 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = .05f;
+    public float speed;
     public bool isPlayerBullet;
     public Vector3 direction;
     public float damage = 10f;
 
+    [SerializeField] private Animator animator;
     [SerializeField] private Rigidbody2D rb;
+
+    private bool destroyed = false;
+
+    private void Update()
+    {
+        transform.eulerAngles = new Vector3(0, 0, Mathf.Atan2(direction.y, direction.x) * 180 / Mathf.PI);
+    }
 
     public void FixedUpdate()
     {
-        rb.MovePosition(transform.position + direction * speed);
+        if (destroyed) return;
+        // rb.velocity = Vector2.zero;
+        rb.MovePosition(transform.position + direction.normalized * speed);
     }
 
-    private void OnTriggerEnter2D(Collider2D collider)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isPlayerBullet && collider.CompareTag("Enemy"))
+        if (isPlayerBullet && collision.collider.CompareTag("Enemy"))
         {
-            collider.gameObject.GetComponent<Enemy>().Hit(damage);
-            Destroy(gameObject);
+            collision.collider.gameObject.GetComponent<Enemy>().Hit(damage);
+            Explode();
             return;
         }
-        if (!isPlayerBullet && collider.CompareTag("Player"))
+        if (!isPlayerBullet && collision.collider.CompareTag("Player"))
         {
-            collider.gameObject.GetComponent<PlayerHealth>().Hit(damage, transform.position);
-            Destroy(gameObject);
+            collision.collider.gameObject.GetComponent<PlayerHealth>().Hit();
+            Explode();
             return;
         }
-        if (collider.CompareTag("Ground"))
+        if (collision.collider.CompareTag("Ground"))
         {
-            Destroy(gameObject);
+            Explode();
         }
     }
+
+    private void Explode()
+    {
+        destroyed = true;
+        GetComponent<CircleCollider2D>().enabled = false;
+        animator.Play("explosion");
+        Destroy(gameObject, .5f);
+    }
+
 }

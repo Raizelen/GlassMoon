@@ -98,7 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5088612269504287120, guid: 8a356f3caab516c42b431bd913d3fd22, type: 3}
-  startAngle: 30
-  endAngle: 150
-  numberOfBullets: 5
-  interval: 3
+  bulletSpeed: 0.05
+  startAngle: 0
+  endAngle: 180
+  numberOfBullets: 10
+  interval: 5

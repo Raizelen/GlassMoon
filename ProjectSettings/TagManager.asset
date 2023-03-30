@@ -10,6 +10,7 @@ TagManager:
   - Portal
   - FallDeath
   - Finish_
+  - Finish Level
   layers:
   - Default
   - TransparentFX
@@ -44,6 +45,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BehindBackground
+    uniqueID: 3413074601
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
